@@ -34,11 +34,11 @@ Minor variations exist in the outputs, based on the controller design and perfor
 
 ### 3.1 Preliminary checks:
 
-1. **Solver & step**  
+1. **Solver & Step Settings**  
    * Continuous-time: `ode45`   ·  Discrete-time: `Discrete (no states)`<br>
      _(Discrete models will still run with `ode45`, but in case of errors, match the solver to the model type)._
 
-2. **Data exchange settings**  
+2. **Model Settings**  
    *Simulink ➜ Model Settings ➜ Data Import/Export*  
    - tick **Time**, **States**, **Output**, **Signal logging**, **Data stores**  
    - set **Format** = **Dataset** (since all *toWorkspace* blocks return **Timeseries** objects)
