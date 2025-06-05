@@ -5,91 +5,52 @@ _Assignments on both the Accurate & Black-Box motor models_
 
 ---
 
-## 1 Repository layout
+*Every* **LAB x** session (`x = {0,1,2,3,4}`) contains **sub-projects** numbered in the order they appear in the corresponding **METHODS / ASSIGNMENT** Paper.
 
-.
-├── LAB0/
+Each sub-project follows one consistent structure (the `_xxx` part of the filename is specific to the sub-project terminology used):
 
-│ └── sub-project-00/
-
-│ ├── 0.final_results.m
-
-│ ├── EstimTrial_… .m
-
-│ ├── Controller.m
-
-│ └── *.slx
-
-├── LAB1/
-
-│ └── …
-
-├── LAB2/
-
-│ └── …
-
-├── LAB3/
-
-│ └── …
-
-└── LAB4/
-
-└── …
-
-
-*Every* **LAB x** session (`x = 0‥4`) contains **sub-projects** numbered in the order they appear in the corresponding **METHODS / ASSIGNMENT** hand-out.
-
-Each sub-project follows one consistent structure<sup>†</sup>:
-
-| File / folder | Role |
+| FileDelimiter_xxx.filetype | Role |
 | :-- | :-- |
-| `EstimTrial_….m`  or  `model_parameters.m` | defines plant & sensor parameters |
-| `Controller.m` | computes controller parameters (PID, LQR, …) |
-| `0.final_results.m` | *one-click* master script that loads everything, launches Simulink, runs validation tests, and produces the outputs listed in §&nbsp;2 |
-
-<sup>† Minor variations exist when a particular controller requires extra helper files, but the spirit is identical.</sup>
+| `Plant_xxx.m` | Defines Plant, Sensor and Actuator Parameters |
+| `Controller_xxx.m` | Sets up and computes Controller Parameters (PID, LQR, …) |
+| `A_final_results.m` or `A_final_measurements.m`  | *one-click* master script that loads everything, launches the Simulink Model, runs validation tests, and produces the outputs listed in §&nbsp;2 |
+| `Model_xxx.slx` | The main Simulink Model which contains all Subsystem References |
 
 ---
 
-## 2 End-product of **every** run <a id="end-products"></a>
+## 2 End-outputs of **every** run <a id="end-products"></a>
 
-* **CSV tables** &nbsp;|&nbsp; key response specs (rise time, settling time, overshoot, …)  
-  &nbsp;&nbsp;↳ automatically saved to `*.csv` and echoed to the Command Window  
+* **CSV tables** &nbsp;|&nbsp; display the main response metrics (rise time, settling time, overshoot, RMS error, etc.)  
+  &nbsp;&nbsp;↳ automatically saved to `*.csv` and displayed in the Command Window as the sub-project is run  
 * **PNG plots** &nbsp;|&nbsp; response curves + parameter sweeps  
-  &nbsp;&nbsp;↳ saved to `*.png` with tidy legends & captions
+  &nbsp;&nbsp;↳ saved to `*.png` with the relevant legends, annotations & captions
 
-Both artefacts land in the same sub-project folder, so version control diffing is effortless.
+All outputs are saved in the same directory where the sub-project exists and are intentionally overwritten per each run in this version of the Repository.
+Minor variations exist in the outputs, based on the controller design and performance metrics of interest.
 
 ---
 
 ## 3 Instructions for use
 
-### 3.1 Pre-run checks
+### 3.1 Preliminary checks:
 
 1. **Solver & step**  
    * Continuous-time: `ode45`   ·  Discrete-time: `Discrete (no states)`<br>
-     _(Discrete models will still run with `ode45`, but it is cleaner to match the solver to the model type)._
+     _(Discrete models will still run with `ode45`, but in case of errors, match the solver to the model type)._
 
 2. **Data exchange settings**  
    *Simulink ➜ Model Settings ➜ Data Import/Export*  
    - tick **Time**, **States**, **Output**, **Signal logging**, **Data stores**  
-   - set **Format** = **Dataset** (all *toWorkspace* blocks then return **Timeseries** objects)
+   - set **Format** = **Dataset** (since all *toWorkspace* blocks return **Timeseries** objects)
 
 ### 3.2 Run a sub-project
 
 1. `cd` into the desired sub-project folder.  
-2. Open **`0.final_results.m`** (quickly spotted thanks to the `0.` prefix).  
+2. Open **`A_final_results.m`**   
 3. Hit **Run**.  
    * MATLAB loads parameters & controller  
    * Simulink compiles → runs validation scenarios  
-   * See §&nbsp;2 for the resulting CSV + PNG files
-
----
-
-## 4 Need the quick reference again?
-
-Jump back to **[§ 2 End-product of every run](#end-products)** to recall what artefacts to expect.
-
+   * The relevant CSV Tables + PNG Plots are displayed & Saved 
 ---
 
 > *I hope you enjoy exploring these labs as much as I enjoyed crafting them!*  
