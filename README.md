@@ -16,6 +16,8 @@ Each sub-project follows one consistent structure (the `_xxx` part of the filena
 | `Model_xxx.slx` | The main Simulink Model which contains all Subsystem References |
 | `A_final_results.m` or `A_final_measurements.m`  | *One-click* master script that loads the previous files, launches the Simulink Model, runs validation tests, and produces the outputs outlining Control Performance |
 
+Note: For the **Parameter Estimation sub-projects in LAB0 and LAB3**, the master scripts to be run are again delimited by `A_xxx`, where `_xxx` denotes the parameter(s) estimated in that file.
+
 
 ---
 
